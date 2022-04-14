@@ -1,2 +1,2 @@
 # cypress-universe
-Web Automation using Cypress.io
+Cypress Universe | Web Automation using Cypress.io
