@@ -21,23 +21,17 @@ const { Pool } = require('pg')
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-
-  const pool = new Pool({
-    host: 'kesavan.db.elephantsql.com',
-    user: 'okmmocac',
-    password: 'BRjRvBrTNNXM1cAMxRKdbqEp8kni6VV0',
-    database: 'okmmocac',
-    port: 5432
-  })
+  const db = require(config.configFile)
+  const pool = new Pool(db.dbConfig)
 
   on('task', {
     deleteUser(email) {
-      return new Promise(function(resolve){
-        pool.query('DELETE FROM public.users WHERE email = $1', [email], function(error, result){
-          if(error) {
+      return new Promise(function (resolve) {
+        pool.query('DELETE FROM public.users WHERE email = $1', [email], function (error, result) {
+          if (error) {
             throw error
           }
-          resolve({success: result})
+          resolve({ success: result })
         })
       })
     }
