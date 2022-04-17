@@ -2,116 +2,88 @@ import signupPage from '../support/pages/signup'
 
 describe('signup', function () {
 
+    before(function () {
+        cy.fixture('signup')
+            .then(function (signup) {
+                this.valid_user = signup.valid_user
+                this.invalid_user = signup.duplicate_email
+                this.invalid_email = signup.invalid_email
+                this.invalid_password = signup.invalid_password
+            })
+    })
+
     context('new user', function () {
-        // test data
-        const user = {
-            name: 'Léo Ferreira',
-            email: 'leo.ferreira@mail.io',
-            password: 'pwd@123'
-        }
 
         before(function () {
             // removing user so data is always valid
-            cy.task('deleteUser', user.email)
+            cy.task('deleteUser', this.valid_user.email)
                 .then(function (result) {
                     console.log(result)
                 })
         })
 
         it('should register a new user', function () {
-            // accessing registration page
+            const user = this.valid_user
             signupPage.go()
-            // filling & submitting the registration form
             signupPage.form(user)
             signupPage.submit()
-            //  expected result assertion
             const msg = 'Agora você se tornou um(a) Samurai, faça seu login para ver seus agendamentos!'
             signupPage.toast.haveText(msg)
         })
     })
 
     context('duplicate email', function () {
-        const user = {
-            name: 'João Lucas',
-            email: 'joao.lucas@mail.io',
-            password: 'pwd@123',
-            is_provider: true
-        }
 
         before(function () {
-            cy.task('deleteUser', user.email)
-                .then(function (result) {
-                    console.log(result)
-                })
-
-            cy.request(
-                'POST',
-                'http://localhost:3333/users',
-                user
-            ).then(function (response) {
-                expect(response.status).to.eq(200)
-            })
+            cy.createUser(this.invalid_user)
         })
 
         it('should not register user', function () {
-            // accessing registration page
             signupPage.go()
-            // filling & submitting the registration form
-            signupPage.form(user)
+            signupPage.form(this.invalid_user)
             signupPage.submit()
-            //  expected result assertion
             const msg = 'Email já cadastrado para outro usuário.'
             signupPage.toast.haveText(msg)
         })
     })
 
     context('invalid email', function () {
-        const user = {
-            name: 'Liza Olsen',
-            email: 'liza.mail.io',
-            password: 'pwd@123',
-            is_provider: true
-        }
-        const msg = 'Informe um email válido'
+        const err = 'Informe um email válido'
 
-        it('should display alert message ' + msg, function () {
+        it('should display alert message ' + err, function () {
             signupPage.go()
-
-            signupPage.form(user)
+            signupPage.form(this.invalid_email)
             signupPage.submit()
-
-            signupPage.alertError(msg)
+            signupPage.alert.error(err)
         })
     })
 
     context('invalid password', function () {
 
         const password = ['1', '2a', 'ab3', 'abc4', 'ab#c5']
-        const msg = 'Pelo menos 6 caracteres'
+        const err = 'Pelo menos 6 caracteres'
 
         beforeEach(function () {
             signupPage.go()
         })
 
         password.forEach(function (pwd) {
-            it('should display alert message ' + msg + " password: " + pwd, function () {
-                const user = {
-                    name: 'Liza Olsen',
-                    email: 'liza.olsen@mail.io',
-                    password: pwd
-                }
-                signupPage.form(user)
+            it('should display alert message ' + 'password: ' + pwd, function () {
+
+                this.invalid_password.password = pwd
+
+                signupPage.form(this.invalid_password)
                 signupPage.submit()
             })
         })
 
         afterEach(function () {
-            signupPage.alertError(msg)
+            signupPage.alert.error(err)
         })
     })
 
     context('required fields', function () {
-        const alertMessages = [
+        const errors = [
             'Nome é obrigatório',
             'E-mail é obrigatório',
             'Senha é obrigatória'
@@ -122,9 +94,9 @@ describe('signup', function () {
             signupPage.submit()
         })
 
-        alertMessages.forEach(function (msg) {
-            it('should alert ' + msg.toLowerCase(), function () {
-                signupPage.alertError(msg)
+        errors.forEach(function (err) {
+            it('should alert ' + err.toLowerCase(), function () {
+                signupPage.alert.error(err)
             })
 
         })

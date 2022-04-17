@@ -1,0 +1,25 @@
+{
+	"valid_user": {
+		"name": "Léo Ferreira",
+		"email": "leo.ferreira@mail.io",
+		"password": "pwd@123",
+		"is_provider": true
+	},
+	"duplicate_email": {
+		"name": "João Lucas",
+		"email": "joao.lucas@mail.io",
+		"password": "pwd@123",
+		"is_provider": true
+	},
+	"invalid_email": {
+		"name": "Liza Olsen",
+		"email": "liza.mail.io",
+		"password": "pwd@123",
+		"is_provider": true
+	},
+	"invalid_password": {
+		"name": "Jason Friday",
+		"email": "jason.fridayn@mail.io",
+		"password": null
+	}
+}

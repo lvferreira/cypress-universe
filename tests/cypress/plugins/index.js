@@ -34,6 +34,21 @@ module.exports = (on, config) => {
           resolve({ success: result })
         })
       })
+    },
+    findToken(email) {
+      return new Promise(function (resolve) {
+        pool.query('SELECT TKS.token FROM ' +
+          '"public"."users" USR ' +
+          'INNER JOIN "public"."user_tokens" TKS ' +
+          'ON USR.id = TKS.user_id ' +
+          'WHERE USR.email = $1 ' +
+          'ORDER BY TKS.created_at', [email], function (error, result) {
+            if (error) {
+              throw error
+            }
+            resolve({ token: result.rows[0].token })
+          })
+      })
     }
   })
 }
