@@ -1,14 +1,14 @@
 {
-  "baseUrl": "http://localhost:3000",
-  "apiServer": "http://localhost:3333",
-  "viewportWidth": 1440,
-  "viewportHeight": 900,
-  "dbConfig": {
-    "host": "kesavan.db.elephantsql.com",
-    "user": "okmmocac",
-    "password": "BRjRvBrTNNXM1cAMxRKdbqEp8kni6VV0",
-    "database": "okmmocac",
-    "port": 5432
-  },
-  "projectId": "sonwpm"
+	"baseUrl": "https://samuraibs-web-qacademy.herokuapp.com",
+	"apiServer": "https://samuraibs-api-qacademy.herokuapp.com",
+	"viewportWidth": 1440,
+	"viewportHeight": 900,
+	"dbConfig": {
+		"host": "kesavan.db.elephantsql.com",
+		"user": "okmmocac",
+		"password": "BRjRvBrTNNXM1cAMxRKdbqEp8kni6VV0",
+		"database": "okmmocac",
+		"port": 5432
+	},
+	"projectId": "sonwpm"
 }
