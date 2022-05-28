@@ -23,4 +23,4 @@ class RecoveryPage {
     }
 }
 
-export default new RecoveryPage
+export default new RecoveryPage()

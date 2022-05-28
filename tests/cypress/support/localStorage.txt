@@ -1,0 +1,12 @@
+window.localStorage.setItem('@Samurai:token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTM2OTIzMDUsImV4cCI6MTY1Mzc3ODcwNSwic3ViIjoiZGYyNjgxYmYtNmVmZC00MmY4LThhNzUtYWY3OGJhZWVjNDA5In0.m7OOgn-F9CuQMjJC4xJ-FJVuBN_ZyD-4Sfry6ISusJc')
+
+window.localStorage.setItem('@Samurai:user', JSON.stringify({
+        "id": "df2681bf-6efd-42f8-8a75-af78baeec409",
+		"name": "Ramón Valdéz",
+		"email": "madruga@televisa.com",
+		"is_provider": true,
+		"avatar": null,
+		"created_at": "2022-05-15T03:24:14.693Z",
+		"updated_at": "2022-05-15T03:24:14.693Z",
+		"avatar_url": null
+    }))

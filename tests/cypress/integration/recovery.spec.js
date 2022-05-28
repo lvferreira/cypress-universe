@@ -1,4 +1,4 @@
-import recovery from '../support/pages/recovery'
+import recovery from '../support/pages/password'
 import reset from '../support/pages/reset'
 
 describe('password recovery', function () {

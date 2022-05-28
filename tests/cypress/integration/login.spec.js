@@ -22,7 +22,7 @@ describe('login', function () {
             login.form(user)
             login.submit()
 
-            dashboard.header.loggedIn(user)
+            dashboard.header.loggedIn(user.name)
         })
 
     })
