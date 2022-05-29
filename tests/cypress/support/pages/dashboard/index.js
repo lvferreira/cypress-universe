@@ -8,7 +8,7 @@ class Dashboard {
     }
 
     calendarShouldBeVisible() {
-        cy.get(el.calendar, { timeout: 10000 })
+        cy.get(el.calendar)
             .should('be.visible')
     }
 
@@ -83,7 +83,7 @@ class Dashboard {
             .should('be.visible')
             .parent()
             .contains(el.hourBox, hour)
-            .should('be.visible', { timeout: 10000 })
+            .should('be.visible')
     }
 
 }

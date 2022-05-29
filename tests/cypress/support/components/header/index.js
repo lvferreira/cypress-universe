@@ -3,7 +3,7 @@ import { el } from './elements'
 class Header {
 
     loggedIn(username) {
-        cy.get(el.profile, { timeout: 10000 })
+        cy.get(el.profile)
             .should('be.visible')
             .should('have.text', username)
     }

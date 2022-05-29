@@ -27,32 +27,6 @@ describe('login', function () {
 
     })
 
-    context('invalid password', function () {
-        let user = {
-            name: 'Celso Kamura',
-            email: 'kamura@samuraibs.io',
-            password: 'pwd@123',
-            is_provider: true
-        }
-
-        before(function () {
-            cy.createUser(user)
-                .then(function () {
-                    user.password = 'xpto#123'
-                })
-        })
-
-        it('should notify credential error', function () {
-            login.go()
-            login.form(user)
-            login.submit()
-
-            const msg = 'Ocorreu um erro ao fazer login, verifique suas credenciais.'
-            login.toast.haveText(msg)
-        })
-
-    })
-
     context('invalid e-mail', function () {
 
         const emails = [
@@ -81,6 +55,32 @@ describe('login', function () {
 
                 login.alert.error(alert)
             })
+        })
+
+    })
+
+    context('invalid password', function () {
+        let user = {
+            name: 'Celso Kamura',
+            email: 'kamura@samuraibs.io',
+            password: 'pwd@123',
+            is_provider: true
+        }
+
+        before(function () {
+            cy.createUser(user)
+                .then(function () {
+                    user.password = 'xpto#123'
+                })
+        })
+
+        it('should notify credential error', function () {
+            login.go()
+            login.form(user)
+            login.submit()
+
+            const msg = 'Ocorreu um erro ao fazer login, verifique suas credenciais.'
+            login.toast.haveText(msg)
         })
 
     })
