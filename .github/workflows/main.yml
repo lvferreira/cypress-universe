@@ -6,6 +6,10 @@ name: Cypress.io UI Tests (Chrome)
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      specs:
+        description: 'Run ALL or UNIQUE spec'
+        default: cypress/integration/*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,7 +42,7 @@ jobs:
           record: true
           parallel: true
           group: 'UI - Chrome'
-          spec: cypress/integration/*
+          spec: ${{ github.event.inputs.specs }}
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Recommended: pass the GitHub token lets this action correctly
